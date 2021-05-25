@@ -24,9 +24,9 @@ pid_t parentId;
 pid_t pid;
 int s;
 void child_handler(int signo);
-#define THINKINGTIME 3
+#define THINKINGTIME 4
 #define EATINGTIME 4
-#define TotalMeals 25//the number of total meals 
+#define TotalMeals 6//the number of total meals 
 
 int nuMeals=0; 
 int num = 0;
@@ -130,6 +130,9 @@ int num = 0;
              philosophere(num,semid);
              break;
          }  	 
+		 else{//parent process
+          sleep(1); //Here delay the parent process program, wait for all child processes to be created first
+        }	
      }
 	 
 	while((pid=wait(&s))>0){
