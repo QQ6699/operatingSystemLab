@@ -131,8 +131,15 @@ void copy_mmap(int fd_from, int fd_to)
 	if (fdes   == MAP_FAILED) err(1, "Error in mapping destination file");
 //Copy the contents of the memory by mapping address
 	memcpy(fdes, fsrc, sb.st_size);
+	//release the mapping relationship
+	if(munmap(fsrc, sb.st_size)){
+	fprintf(stderr,"munmap source file destination fail!\n");
+    }
+	if(munmap(fdes, sb.st_size)){
+	fprintf(stderr,"munmap destination file destination fail!\n");
+    }
+	
 }
-
 
 void help_information()
 {
